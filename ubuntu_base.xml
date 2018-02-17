@@ -1,0 +1,43 @@
+<domain type="kvm">
+    <name>vm11</name>
+    <cpu>
+        <topology cores="1" sockets="1" threads="1" />
+    </cpu>
+    <uuid>90e7bca4-97b2-11e4-86bf-001e682ee78a</uuid>
+    <memory unit="MB">2048</memory>
+    <currentMemory unit="MB">512</currentMemory>
+    <vcpu placement="static">1</vcpu>
+    <os>
+        <type>hvm</type>
+        <boot dev="hd" />
+    </os>
+    <features>
+        <acpi />
+        <apic />
+        <pae />
+    </features>
+    <clock offset="utc" />
+    <on_poweroff>destroy</on_poweroff>
+    <on_reboot>restart</on_reboot>
+    <on_crash>restart</on_crash>
+    <devices>
+        <emulator>/usr/bin/kvm-spice</emulator>
+        <disk device="disk" type="file">
+            <driver cache="none" name="qemu" type="raw" />
+            <source file="/var/disks/vm11.img" />
+            <target dev="hda" />
+            <address bus="0" controller="0" target="0" type="drive" unit="0" />
+        </disk>
+        <disk device="cdrom" type="file">
+            <source file="/var/images/ubuntu-14.04.1-server-amd64.iso" />
+            <driver name="qemu" type="raw" />
+            <target bus="ide" dev="hdc" />
+            <readyonly />
+            <address bus="1" controller="0" target="0" type="drive" unit="0" />
+        </disk>
+        <interface type="network">
+            <source network="default" />
+        </interface>
+        <graphics port="-1" type="vnc" />
+    </devices>
+</domain>
