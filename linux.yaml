@@ -1,0 +1,22 @@
+---
+name: "kernel-linux"
+enable_cache: true
+suites:
+- "xenial"
+architectures:
+- "amd64"
+packages:
+- "fakeroot"
+- "build-essential"
+- "ncurses-dev"
+- "xz-utils"
+- "libssl-dev"
+- "bc"
+remotes: []
+reference_datetime: "2017-06-01 00:00:00"
+files:
+- "linux-4.16-rc1.tar.gz"
+script: |
+  tar xzf linux-4.16-rc1.tar.gz
+  cd linux-4.16-rc1
+  sudo make -j 4 && sudo make modules_install -j 4
